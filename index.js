@@ -32,11 +32,13 @@ let definition = {
   },
   f: {
     description: 'File filter pattern',
-    alias: 'filefilter'
+    alias: 'filefilter',
+    multiple: true
   },
   d: {
     description: 'Directory filter pattern',
-    alias: 'dirfilter'
+    alias: 'dirfilter',
+    multiple: true
   }
 }
 
