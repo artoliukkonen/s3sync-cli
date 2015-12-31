@@ -1,0 +1,37 @@
+{
+  "name": "s3sync-cli",
+  "version": "1.0.0",
+  "description": "CLI wrapper for s3-sync",
+  "main": "index.js",
+  "scripts": {
+    "test": "lab test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikefrey/s3sync-cli.git"
+  },
+  "keywords": [
+    "aws",
+    "amazon",
+    "s3",
+    "sync",
+    "watch",
+    "cli"
+  ],
+  "bin": {
+    "s3sync": "./index.js"
+  },
+  "author": "Mike Frey <frey.mike@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mikefrey/s3sync-cli/issues"
+  },
+  "homepage": "https://github.com/mikefrey/s3sync-cli#readme",
+  "dependencies": {
+    "bossy": "^2.0.0",
+    "glob": "^6.0.3",
+    "level": "^1.4.0",
+    "readdirp": "^2.0.0",
+    "s3-sync": "^1.0.1"
+  }
+}
