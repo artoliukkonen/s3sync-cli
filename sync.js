@@ -5,8 +5,10 @@ const s3sync = require('s3-sync')
 const readdirp = require('readdirp')
 const Path = require('path')
 
-module.exports = function(bucket, dir, fileFilter, dirFilter) {
+module.exports = function(bucket, dir, fileFilter, dirFilter, concurrency) {
   return new Promise((resolve, reject) => {
+
+    dirFilter = (dirFilter || []).map(item => '!'+item)
 
     // To cache the S3 HEAD results and speed up the
     // upload process. Usage is optional.
@@ -15,7 +17,7 @@ module.exports = function(bucket, dir, fileFilter, dirFilter) {
     let files = readdirp({
       root: dir,
       fileFilter: fileFilter,
-      directoryFilter: ['!.git', '!.s3cache'].concat(dirFilter || [])
+      directoryFilter: ['!.git', '!.s3cache'].concat(dirFilter)
     })
 
     // Takes the same options arguments as `knox`,
@@ -24,7 +26,7 @@ module.exports = function(bucket, dir, fileFilter, dirFilter) {
       key: process.env.AWS_ACCESS_KEY,
       secret: process.env.AWS_SECRET_KEY,
       bucket: bucket,
-      concurrency: 16,
+      concurrency: concurrency,
       acl: 'private'
       // prefix : 'mysubfolder/' //optional prefix to files on S3
     })

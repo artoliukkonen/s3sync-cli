@@ -36,9 +36,15 @@ let definition = {
     multiple: true
   },
   d: {
-    description: 'Directory filter pattern',
+    description: 'Directories to ignore',
     alias: 'dirfilter',
     multiple: true
+  },
+  c: {
+    description: 'Concurrency',
+    alias: 'concurrency',
+    type: 'number',
+    default: 4
   }
 }
 
@@ -50,7 +56,7 @@ if (args instanceof Error) {
 }
 
 if (args.h) {
-  console.log(Bossy.usage(definition, `\n  s3sync -b ${_('bucket')} [-p ${_('path')}] [-f ${_('pattern')}] [-d ${_('pattern')}] [-t ${_('n')}]`))
+  console.log(Bossy.usage(definition, `\n  s3sync -b ${_('bucket')} [-p ${_('path')}] [-f ${_('pattern')}] [-d ${_('pattern')}] [-t ${_('n')}] [-c ${_('n')}]`))
   return
 }
 
@@ -62,7 +68,7 @@ function restartSync() {
 
 function startSync() {
 
-  sync(args.b, args.p, args.f, args.d)
+  sync(args.b, args.p, args.f, args.d, args.c)
     .then(() => {
       console.log('\nSync completed successfully')
       restartSync()
