@@ -32,7 +32,7 @@ module.exports = function(bucket, dir, fileFilter, dirFilter, concurrency) {
     })
 
     uploader.on('data', function(file) {
-      let msg = file.fresh ? file.url.replace(/^http:\/\/[^\/]+/) : 'unchanged'
+      let msg = file.fresh ? file.url.replace(/^https?:\/\/[^\/]+/) : 'unchanged'
       console.log(`${file.path} -> ${msg}`)
     })
 
